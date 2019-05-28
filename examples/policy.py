@@ -31,7 +31,6 @@ import argparse
 import json
 import os
 import time
-# testcommit
 import numpy as np
 
 from autolab_core import RigidTransform, YamlConfig, Logger

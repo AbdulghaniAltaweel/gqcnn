@@ -252,20 +252,20 @@ class GQCNNTF(object):
         if use_legacy:
             layer_iter = iter(base_arch)
             while not found_base_layer:
-                layer_name = layer_iter.next()
+                layer_name = next(layer_iter)
                 self._base_layer_names.append(layer_name)
                 if layer_name == output_layer:
                     found_base_layer = True
         else:
             stream_iter = iter(base_arch)
             while not found_base_layer:
-                stream_name = stream_iter.next()
+                stream_name = next(stream_iter)
                 stream_arch = base_arch[stream_name]
                 layer_iter = iter(stream_arch)
                 stop = False
                 while not found_base_layer and not stop:
                     try:
-                        layer_name = layer_iter.next()
+                        layer_name = next(layer_iter)
                         self._base_layer_names.append(layer_name)
                         if layer_name == output_layer:
                             found_base_layer = True
@@ -482,7 +482,7 @@ class GQCNNTF(object):
         if self._sess is None:
             self._logger.warning('No TF Session to close...')
             return
-        self._logger.info('Closing TF Session...')
+       # self._logger.info('Closing TF Session...')
         with self._graph.as_default():
             self._sess.close()
             self._sess = None
@@ -574,7 +574,7 @@ class GQCNNTF(object):
             close_sess = True
             self.open_session()
 
-        first_layer_name = self._architecture['im_stream'].keys()[0]
+        first_layer_name = list(self._architecture['im_stream'].keys())[0]
         try:
             filters = self._sess.run(self._weights.weights['{}_weights'.format(first_layer_name)])
         except:
@@ -949,7 +949,7 @@ class GQCNNTF(object):
         else:
             self._logger.info('Reinitializing layer {}.'.format(name))
             std = np.sqrt(2.0 / (fan_in))
-            fcW = tf.Variable(tf.truncated_normal([fan_in, out_size], stddev=std), name='{}_weights'.format(name))
+            fcW = tf.Variable(tf.truncated_normal([int(fan_in), out_size], stddev=std), name='{}_weights'.format(name))
             if final_fc_layer:
                 fcb = tf.Variable(tf.constant(0.0, shape=[out_size]), name='{}_bias'.format(name))
             else:

@@ -161,7 +161,7 @@ class GQCNNTrainerTF(object):
             raise ValueError('Optimizer %s not supported' %(self.cfg['optimizer']))
 
         # compute gradients
-        gradients, variables = zip(*optimizer.compute_gradients(loss, var_list=var_list))
+        gradients, variables = list(zip(*optimizer.compute_gradients(loss, var_list=var_list)))
         # clip gradients to prevent exploding gradient problem
         gradients, global_grad_norm = tf.clip_by_global_norm(gradients, self.max_global_grad_norm)
         # generate op to apply gradients
@@ -267,7 +267,7 @@ class GQCNNTrainerTF(object):
             unregularized_loss = loss
             
             # part 2: regularization
-            layer_weights = self.weights.values()
+            layer_weights = list(self.weights.values())
             with tf.name_scope('regularization'):
                 regularizers = tf.nn.l2_loss(layer_weights[0])
                 for w in layer_weights[1:]:
@@ -284,7 +284,7 @@ class GQCNNTrainerTF(object):
             staircase=True)
 
         # setup variable list
-        var_list = self.weights.values()
+        var_list = list(self.weights.values())
         if finetune:
             var_list = []
             for weights_name, weights_val in self.weights.items():
