@@ -29,7 +29,7 @@ config = json.load(open(config_filename, 'r'))
 start_time = time.time()
 gqcnn = get_gqcnn_model('tf')(gqcnn_params)
 #%%
-trainer = get_gqcnn_trainer('tf')(gqcnn, 'data/training/Dexnet-2.0_testTraining', 'image_wise', 'models/', train_config, 'GQCNN-2.0_finetuned_test5')
+trainer = get_gqcnn_trainer('tf')(gqcnn, 'data/training/Dexnet-2.0_testFinetuning', 'image_wise', 'models/', train_config, 'GQCNN-2.0_finetuned_org')
 # trainer = get_gqcnn_trainer('tf')(gqcnn, 'data/training/Dexnet-2.0_testTraining', 'image_wise', 'models/',train_config, 'GQCNN-2.0_Training_from_Scratch')
 
 #%%
