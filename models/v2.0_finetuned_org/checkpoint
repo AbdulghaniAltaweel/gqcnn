@@ -1,0 +1,6 @@
+model_checkpoint_path: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model.ckpt"
+all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model_01407.ckpt"
+all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model_02814.ckpt"
+all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model_04221.ckpt"
+all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model_05628.ckpt"
+all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_finetuned_org/model.ckpt"
