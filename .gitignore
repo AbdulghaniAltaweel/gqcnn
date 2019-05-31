@@ -14,7 +14,7 @@ develop-eggs/
 dist/
 downloads/
 data/training/
-analysis/
+# analysis/
 models/
 eggs/
 .eggs/
