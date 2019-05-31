@@ -34,6 +34,4 @@ trainer = get_gqcnn_trainer('tf')(gqcnn, 'data/training/Dexnet-2.0_testFinetunin
 
 #%%
 trainer.finetune('models/GQCNN-2.0_org')
-# test git pushing
-# trainer.finetune('models/GQCNN-2.0_org')
 logger.info('Total Fine-tuning Time: ' + str(utils.get_elapsed_time(time.time() - start_time)))
