@@ -343,7 +343,7 @@ class FullyConvolutionalGraspingPolicySuction(FullyConvolutionalGraspingPolicy):
             h_idx = ind[i, 1]
             w_idx = ind[i, 2]
             center = Point(np.asarray([w_idx * self._gqcnn_stride + self._gqcnn_recep_w / 2, h_idx * self._gqcnn_stride + self._gqcnn_recep_h / 2]))
-            axis = -normal_cloud_im[center.y, center.x]
+            axis = -normal_cloud_im[int(center.y), int(center.x)]
             if np.linalg.norm(axis) == 0:
                 continue
             depth = depth_im[center.y, center.x, 0]
