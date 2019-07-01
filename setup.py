@@ -115,7 +115,7 @@ requirements = [
     'autolab-perception',
     'visualization',
     'numpy>=1.14.0',
-    'scipy',
+    'scipy<=1.1.0',
     'matplotlib<3.0.0',
     'opencv-python',
     'scikit-image<0.15.0',
