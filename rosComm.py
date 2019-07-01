@@ -7,7 +7,7 @@ from cv_bridge import CvBridge, CvBridgeError
 import sys
 import numpy as np
 try:
-    sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+    sys.path.remove('/opt/ros/melodic/lib/python2.7/dist-packages')
 except ValueError:
     pass  # do nothing!
 import cv2

@@ -1,24 +1,21 @@
-# roslaunch realsense2_camera rs_camera.launch
 #%%
 %reload_ext autoreload
 %autoreload 2
 %matplotlib inline
+#%%
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-try:
-    sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
-except ValueError:
-    pass  # do nothing!
-import cv2
+import rospy
 sys.path.append('../')
 import logging
 import IPython
 import os
-import rosgraph.roslogging as rl
-import rospy
+#%%
+#import rosgraph.roslogging as rl
+
 import time
-from cv_bridge import CvBridge, CvBridgeError
+#from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CameraInfo
 from autolab_core import Point, RigidTransform, YamlConfig
 from perception import BinaryImage, CameraIntrinsics, ColorImage, DepthImage, RgbdImage
@@ -29,12 +26,17 @@ from gqcnn.grasping import RobustGraspingPolicy, CrossEntropyRobustGraspingPolic
 # from gqcnn.srv import GQCNNGraspPlanner, GQCNNGraspPlannerBoundingBox, GQCNNGraspPlannerSegmask
 from rosComm import RosComm
 #from practical import utils
-import sensor_msgs
+#import sensor_msgs
 #from practical.webserver import sampleClient
 #from practical.raiRobot import RaiRobot
 #from practical.objectives import moveToPosition, gazeAt, scalarProductXZ, scalarProductZZ, distance
 #from practical.vision import findBallPosition, calcDepth,findBallInImage, virtCamIntrinsics as intr
 #import libry as ry
+try:
+    sys.path.remove('/opt/ros/melodic/lib/python2.7/dist-packages')
+except ValueError:
+    pass  # do nothing!
+import cv2
 #%%
 rosco = RosComm()
 rospy.init_node('z')
@@ -44,6 +46,7 @@ intr = rosco.get_camera_intrinsics('/camera/color/camera_info')
 rosco.subscribe_synced_rgbd('/camera/color/image_raw/', '/camera/depth/image_rect_raw/')
 #%%
 #rosco.threaded_synced_rgbd_cb('/camera/color/image_raw/', '/camera/depth/image_rect_raw/')
+
 #%%
 camera_int = CameraIntrinsics(frame='pcl', fx=intr['fx'], fy=intr['fy'], cx=intr['cx'], cy=intr['cy'], height=intr['height'], width=intr['width'])
 #%%
@@ -54,6 +57,8 @@ grasp_policy = CrossEntropyRobustGraspingPolicy(cfg['policy'])
 #%%
 img = rosco.rgb
 d = rosco.depth
+#%%
+print(img)
 #%%
 color_im = ColorImage(img.astype(np.uint8), encoding="bgr8", frame='pcl')
 #%%
