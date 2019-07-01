@@ -9,14 +9,14 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import rospy
-import logging
-import IPython
-import os
+# import logging
+# import IPython
+# import os
 #%%
-import rosgraph.roslogging as rl
-import time
-from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image, CameraInfo
+#import rosgraph.roslogging as rl
+#import time
+#from cv_bridge import CvBridge, CvBridgeError
+#from sensor_msgs.msg import Image, CameraInfo
 from autolab_core import Point, RigidTransform, YamlConfig
 from perception import BinaryImage, CameraIntrinsics, ColorImage, DepthImage, RgbdImage
 from visualization import Visualizer2D as vis
@@ -26,7 +26,7 @@ from gqcnn.grasping import RobustGraspingPolicy, CrossEntropyRobustGraspingPolic
 # from gqcnn.srv import GQCNNGraspPlanner, GQCNNGraspPlannerBoundingBox, GQCNNGraspPlannerSegmask
 from rosComm import RosComm
 #from practical import utils
-import sensor_msgs
+#import sensor_msgs
 #from practical.webserver import sampleClient
 #from practical.raiRobot import RaiRobot
 #from practical.objectives import moveToPosition, gazeAt, scalarProductXZ, scalarProductZZ, distance
@@ -76,11 +76,16 @@ rgbd_state = RgbdImageState(rgbd_im, camera_int)
 #%%
 grasp = grasp_policy(rgbd_state)
 #%%
-img2 = cv2.cvtColor(d, cv2.COLOR_BGR2RGB)
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 img2 = cv2.circle(img2,(int(grasp.grasp.center.x),int(grasp.grasp.center.y)),2,(255,0,0),3)
+plt.imshow(img2)
 
 #%%
-plt.imshow(img2)
+img3 = cv2.cvtColor(d, cv2.COLOR_BGR2RGB)
+img3 = cv2.circle(img3,(int(grasp.grasp.center.x),int(grasp.grasp.center.y)),2,(255,0,0),3)
+plt.imshow(img3)
+
+
 #%%
 vis.figure(size=(16,16))
 vis.imshow(rgbd_im.color, vmin=0.5, vmax=2.5)
