@@ -41,7 +41,7 @@ policy:
   # metrics
   metric:
     type: gqcnn
-    #gqcnn_model: /home/ai/git/gqcnn/models/v2.0_trainedFromScratch
+    #gqcnn_model: models/v2.0_trainedFromScratch
     #gqcnn_model: models/GQCNN-2.1
     gqcnn_model: models/GQCNN-2.0
     #gqcnn_model: models/GQCNN-4.0-PJ

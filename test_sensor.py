@@ -9,29 +9,11 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import rospy
-# import logging
-# import IPython
-# import os
-#%%
-#import rosgraph.roslogging as rl
-#import time
-#from cv_bridge import CvBridge, CvBridgeError
-#from sensor_msgs.msg import Image, CameraInfo
 from autolab_core import Point, RigidTransform, YamlConfig
 from perception import BinaryImage, CameraIntrinsics, ColorImage, DepthImage, RgbdImage
 from visualization import Visualizer2D as vis
 from gqcnn.grasping import RobustGraspingPolicy, CrossEntropyRobustGraspingPolicy, RgbdImageState, Grasp2D, SuctionPoint2D, GraspAction
-#from gqcnn.utils import GripperMode, NoValidGraspsException
-# from gqcnn.msg import GQCNNGrasp, BoundingBox
-# from gqcnn.srv import GQCNNGraspPlanner, GQCNNGraspPlannerBoundingBox, GQCNNGraspPlannerSegmask
 from rosComm import RosComm
-#from practical import utils
-#import sensor_msgs
-#from practical.webserver import sampleClient
-#from practical.raiRobot import RaiRobot
-#from practical.objectives import moveToPosition, gazeAt, scalarProductXZ, scalarProductZZ, distance
-#from practical.vision import findBallPosition, calcDepth,findBallInImage, virtCamIntrinsics as intr
-#import libry as ry
 try:
     sys.path.remove('/opt/ros/melodic/lib/python2.7/dist-packages')
 except ValueError:
@@ -39,10 +21,30 @@ except ValueError:
 import cv2
 sys.path.append('../')
 #%%
+# import logging
+# import IPython
+# import os
+#import rosgraph.roslogging as rl
+#import time
+#from cv_bridge import CvBridge, CvBridgeError
+#from sensor_msgs.msg import Image, CameraInfo
+#from gqcnn.utils import GripperMode, NoValidGraspsException
+# from gqcnn.msg import GQCNNGrasp, BoundingBox
+# from gqcnn.srv import GQCNNGraspPlanner, GQCNNGraspPlannerBoundingBox, GQCNNGraspPlannerSegmask
+#from practical import utils
+#import sensor_msgs
+#from practical.webserver import sampleClient
+#from practical.raiRobot import RaiRobot
+#from practical.objectives import moveToPosition, gazeAt, scalarProductXZ, scalarProductZZ, distance
+#from practical.vision import findBallPosition, calcDepth,findBallInImage, virtCamIntrinsics as intr
+#import libry as ry
+#%%
 rosco = RosComm()
 rospy.init_node('z')
 #%%
 rosco.subscribe_synced_rgbd('/camera/color/image_raw/', '/camera/depth/image_rect_raw/')
+#rosco.subscribe_synced_rgbd('/camera/color/image_raw/', '/camera/depth/color/points')
+#rosco.subscribe_synced_rgbd('/camera/color/image_raw/', '/camera/aligned_depth_to_color/image_raw/')
 #%%
 intr = rosco.get_camera_intrinsics('/camera/color/camera_info')
 #%%
@@ -67,7 +69,6 @@ plt.imshow(d)
 #print(d)
 #%%
 color_im = ColorImage(img.astype(np.uint8), encoding="bgr8", frame='pcl')
-#%%
 depth_im = DepthImage(d.astype(np.float32), frame='pcl')
 color_im = color_im.inpaint(rescale_factor=cfg['inpaint_rescale_factor'])
 depth_im = depth_im.inpaint(rescale_factor=cfg['inpaint_rescale_factor'])
@@ -84,8 +85,6 @@ plt.imshow(img2)
 img3 = cv2.cvtColor(d, cv2.COLOR_BGR2RGB)
 img3 = cv2.circle(img3,(int(grasp.grasp.center.x),int(grasp.grasp.center.y)),2,(255,0,0),3)
 plt.imshow(img3)
-
-
 #%%
 vis.figure(size=(16,16))
 vis.imshow(rgbd_im.color, vmin=0.5, vmax=2.5)
@@ -98,7 +97,6 @@ vis.imshow(rgbd_im.depth, vmin=0.5, vmax=2.5)
 vis.grasp(grasp.grasp, scale=2.0,jaw_width=2.0, show_center=True, show_axis=True, color=plt.cm.RdYlBu(.1))
 vis.title('Elite grasp with score: ' + str(grasp.q_value))
 vis.show()
-
 #%%
 print(grasp.grasp.angle)
 print(grasp.grasp.depth)
@@ -106,8 +104,6 @@ print(grasp.grasp.width)
 print(grasp.grasp.axis)
 #%%
 grasp.grasp.approach_angle
-
 #%%
 grasp.grasp.pose() #returns the transformation from the grasp to the camera frame of reference
-
 #%%
