@@ -5,12 +5,12 @@ val_batch_size: &val_batch_size 64
 # logging params
 num_epochs: 2        # number of epochs to train for
 eval_frequency: 5    # how often to get validation error (in epochs)
-save_frequency: 5   # how often to save output (in epochs)
+save_frequency: 5    # how often to save output (in epochs)
 vis_frequency: 10000  # how often to visualize filters (in epochs)
 log_frequency: 1      # how often to log output (in steps)
 
 # train / val split params 
-train_pct: 0.9              # percentage of the data to use for training vs validation
+train_pct: 0.8              # percentage of the data to use for training vs validation
 total_pct: 1.0              # percentage of all the files to use
 eval_total_train_error: 0   # whether or not to evaluate the total training error on each validataion
 max_files_eval: 1000        # the number of validation files to use in each eval
@@ -26,7 +26,6 @@ momentum_rate: 0.9
 max_training_examples_per_load: 128
 drop_rate: 0.0
 max_global_grad_norm: 100000000000
-optimize_base_layers: 0
 
 # input params
 training_mode: classification
@@ -34,11 +33,11 @@ image_field_name: depth_ims_tf_table
 pose_field_name: hand_poses
 
 # label params
-target_metric_name: robust_ferrari_canny  # name of the field to use for the labels
+target_metric_name: robust_ferrari_canny_pose_3  # name of the field to use for the labels
 metric_thresh: 0.002                 # threshold for positive examples (label = 1 if grasp_metric > metric_thresh)
 
 # preproc params
-num_random_files: 1000     # the number of random files to compute dataset statistics in preprocessing (lower speeds initialization)
+num_random_files: 10000     # the number of random files to compute dataset statistics in preprocessing (lower speeds initialization)
 preproc_log_frequency: 100 # how often to log preprocessing (in steps)
 
 # denoising / synthetic data params
@@ -77,15 +76,13 @@ gqcnn:
 
   # architecture
   architecture:
-    base_model:
-      output_layer: fc4
     im_stream:
       conv1_1:
         type: conv
         filt_dim: 7
         num_filt: 64
         pool_size: 1
-        pool_stride: 1  
+        pool_stride: 1
         pad: SAME
         norm: 0
         norm_type: local_response

@@ -107,3 +107,21 @@ grasp.grasp.approach_angle
 #%%
 grasp.grasp.pose() #returns the transformation from the grasp to the camera frame of reference
 #%%
+
+# Training 
+# python3 tools/train.py data/training/Dexnet-2.0_testTraining --config_filename cfg/train_dex-net_2.0_test.yaml --name v3.0_trainedFromScratch
+
+# Analysis
+# python3 tools/analyze_gqcnn_performance.py v3.0_trainedFromScratch
+
+# Grasping an Example
+# python3 examples/policy.py v3.0_trainedFromScratch --depth_image data/examples/single_object/primesense/depth_4.npy --config_filename cfg/examples/replication/dex-net_2.0.yaml
+
+# Finetuning
+# python3 tools/finetune.py data/training/Dexnet-2.0_testFinetuning v3.0_trainedFromScratch --config_filename cfg/finetune_dex-net_2.0_test_trainedFromScratch.yaml --name v3.0_finetuned_trainedFromScratch
+
+# Anaysis
+# python3 tools/analyze_gqcnn_performance.py v3.0_finetuned_trainedFromScratch
+
+# Grasing
+# python3 examples/policy.py v3.0_finetuned_trainedFromScratch --depth_image data/examples/single_object/primesense/depth_4.npy --config_filename cfg/examples/replication/dex-net_2.0.yaml
