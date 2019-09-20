@@ -1,6 +1,0 @@
-model_checkpoint_path: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model.ckpt"
-all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model_03516.ckpt"
-all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model_07032.ckpt"
-all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model_10548.ckpt"
-all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model_14064.ckpt"
-all_model_checkpoint_paths: "/home/ai/git/gqcnn/tools/../models/v2.0_trainedFromScratch/model.ckpt"
