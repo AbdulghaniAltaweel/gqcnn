@@ -125,3 +125,6 @@ grasp.grasp.pose() #returns the transformation from the grasp to the camera fram
 
 # Grasing
 # python3 examples/policy.py v3.0_finetuned_trainedFromScratch --depth_image data/examples/single_object/primesense/depth_4.npy --config_filename cfg/examples/replication/dex-net_2.0.yaml
+
+
+# python3 tools/finetune.py data/gen/ABC-1k5-GQ/ GQ-Object-Wise --config_filename cfg/finetune_dex-net_2.0_test_org.yaml --split_name object_wise --name GQ-ABC-1k5-Obj-Wise 

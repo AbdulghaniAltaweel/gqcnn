@@ -7,8 +7,6 @@ policy:
   gmm_refit_p: 0.25
   gmm_component_frac: 0.4
   gmm_reg_covar: 0.01
-  type: cem
-  
 
   # general params
   deterministic: 1
@@ -18,7 +16,6 @@ policy:
   sampling:
     # type
     type: antipodal_depth
-    #num_grasp_samples: 1000 # 
 
     # antipodality
     friction_coef: 1
@@ -44,24 +41,7 @@ policy:
   # metrics
   metric:
     type: gqcnn
-    #gqcnn_model: models/GQ-Image-Wise-2.0  # 0.997
-    gqcnn_model: models/GQ-ABC-1k5   # 0.706
-    #gqcnn_model: models/GQ-ABC-1k5-Op-base-layers  # 0.6
-    #gqcnn_model: models/GQ-ABC-1k5-IW-myParams # 0.192
-    #gqcnn_model: models/GQ-ABC-1k5-IW-myParams-base-Layers # 0.152
-    
-    #gqcnn_model: models/GQ-Object-Wise # 0.939
-    #gqcnn_model: models/GQ-ABC-1k5-Obj-Wise # 0.689
-    #gqcnn_model: models/GQ-ABC-1k5-Obj-Wise-Base-Layers # 0.612
-    #gqcnn_model: models/GQ-ABC-1k5-Obj-Wise-myParams # 0.201
-    #gqcnn_model: models/GQ-ABC-1k5-Obj-Wise-myParams-Base-Layers # 0.153
-
-    #gqcnn_model: models/GQ-Stable-Pose-Wise # 0.992
-    #gqcnn_model: models/GQ-ABC-1k5-Stable-Pose-Wise  # 0.688
-    #gqcnn_model: models/GQ-ABC-1k5-Stable-Pose-Wise-Base-Layers # 0.653
-
-    #gqcnn_model: models/ABC-287-GQ-FT-IW-2.0   # 0.677
-    #gqcnn_model: models/ABC-GQ-IM-TFS  # 0.669
+    gqcnn_model: models/GQ-ABC-1k5-Op-base-layers
     
     crop_height: 96
     crop_width: 96
